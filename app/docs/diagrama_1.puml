@@ -1,0 +1,56 @@
+@startuml Diagram de Clases
+
+class Model {
+    clase de SQLAlchemy
+}
+
+class User {
+    - id: int
+    - username: str
+    - email: str
+    - password: str
+}
+
+class UserData {
+    - id_usuario: int
+    - name: str
+    - surname: str
+    - phone: str
+    - id_address: int
+}
+
+class UserAddress {
+    - id_address: int
+    - street: str
+    - number: int
+    - floor: str
+    - apartment: str
+    - postal_code: str
+    - province: str
+}
+
+class Product {
+    - id_product: int
+    - name: str
+    - description: str
+    - price: str
+    - stock: int
+    - id_category: int
+}
+
+class Category {
+    - id_category: int
+    - name: str
+    - description: str
+}
+
+
+Model <|-- User
+Model <|-- UserData
+Model <|-- UserAddress
+Model <|-- Category
+Model <|-- Product
+User "1" *--- "1" UserData : contiene
+UserData "1" *--- "1" UserAddress : tiene
+Product "1" *--- "1" Category : tiene
+@enduml
