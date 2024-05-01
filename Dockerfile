@@ -1,6 +1,12 @@
 #imagen de python
 FROM python:3.10-slim-bullseye
 
+#configuraciones
+ENV GECKODRIVER_VER=v0.31.0
+ENV FLASK_ENV=production
+ENV PYTHONUNBUFFERED=1
+ENV PATH=$PATH:/home/flaskapp/.local/bin
+
 #Crea un usuario llamado flaskapp
 RUN useradd --create-home --home-dir /home/flaskapp flaskapp
 

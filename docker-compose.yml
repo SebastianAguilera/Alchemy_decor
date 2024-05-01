@@ -1,0 +1,31 @@
+services:
+  postgresql:
+    container_name: postgresql-servidor
+    image: postgres:15.4-bullseye
+    networks:
+      - mired
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./_data:/var/lib/postgresql/data
+    restart: always
+
+  flaskapp:
+    build:
+      context: .
+      dockerfile: Dockerfile # Nombre de tu Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - POSTGRES_HOST=postgresql # Nombre del servicio de PostgreSQL en Docker Compose
+      - POSTGRES_USER=usuario
+      - POSTGRES_PASSWORD=contraseña
+      - POSTGRES_DB=basededatos
+
+networks:
+  mired:
