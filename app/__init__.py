@@ -1,5 +1,7 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 
 def create_app() -> None:
   #se crea una instancia de la aplicacion Flask
