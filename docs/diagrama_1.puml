@@ -44,6 +44,17 @@ class Category {
     - description: str
 }
 
+class Color {
+    - id_color: int
+    - name: str
+}
+
+class ProductColor {
+    - id_product_color: int
+    - id_product: int
+    - id_color: int
+}
+
 
 Model <|-- User
 Model <|-- UserData
