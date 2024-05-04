@@ -5,5 +5,6 @@ from dataclasses import dataclass
 class Color(db.Model):
     __tablename__ = 'color'
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    color_name: str = db.Column(db.String(120), nullable=False)
-    color = db.relationship("Color", back_populates='color', uselist=False)
+    name: str = db.Column(db.String(120), nullable=False)
+    description: str = db.Column(db.String(120), nullable=False)
+    products = db.relationship("Product", secundary="product_color", back_populates="colors")

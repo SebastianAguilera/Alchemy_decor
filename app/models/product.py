@@ -3,11 +3,9 @@ from dataclasses import dataclass
 
 @dataclass
 class Product(db.Model):
-    __tablename__ = 'product'
+    __tablename__ = 'products'
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name: str = db.Column(db.String(120), nullable=False)
     description: str = db.Column(db.String(120), nullable=False)
-    price: str = db.Column(db.String(120), nullable=False)
-    category_id = db.Column('category_id', db.Integer, db.ForeignKey('category.id'))
-    product = db.relationship("Product", back_populates='product', uselist=False)
-
+    price: str = db.Column(db.String(120), nullable=False) #Capaz deberia ser Integer para realizar operaciones con el precio
+    colors = db.relationship("Color", secundary="product_color", back_populates="products")

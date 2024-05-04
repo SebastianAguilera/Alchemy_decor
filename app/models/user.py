@@ -13,3 +13,4 @@ class User(db.Model):
 
     def __init__(self, user_data: UserData = None):
         self.data = user_data
+

@@ -9,5 +9,5 @@ class UserData(db.Model):
     lastname: str = db.Column(db.String(120), nullable=False)
     phone: str = db.Column(db.String(120), nullable=False)
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", back_populates='data', uselist=False)
+    user = db.relationship("User", back_populates='data')
 
