@@ -1,4 +1,4 @@
-from app.models import UserData
+from app.models import User
 from marshmallow import validate, Schema, fields, post_load
 
 class UserSchema(Schema):
@@ -10,4 +10,4 @@ class UserSchema(Schema):
 
     @post_load
     def make_usuario(self, data, **kwargs):
-        return UserData(**data)
+        return User(**data)
