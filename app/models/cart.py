@@ -1,3 +1,4 @@
+"""
 from app import db
 from dataclasses import dataclass
 
@@ -8,5 +9,6 @@ class Cart(db.Model):
     state: str = db.Column(db.String(120), nullable=False)
     price: float = db.Column(db.Float, nullable=False)
     #relacion con productos
-    products = db.relationship("Product", secundary="cart_product", back_populates="carts")
+    products = db.relationship("Product", secondary="cart_product", back_populates="carts")
+"""
     

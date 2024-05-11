@@ -1,3 +1,4 @@
+"""
 from app.models import Product
 from .color_schema import ColorSchema
 from marshmallow import validate, Schema, fields, post_load
@@ -13,3 +14,4 @@ class ProductSchema(Schema):
     @post_load
     def make_producto(self, data, **kwargs):
         return Product(**data)
+"""

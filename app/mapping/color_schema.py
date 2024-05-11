@@ -1,3 +1,4 @@
+"""
 from app.models import Color
 from marshmallow import validate, Schema, fields, post_load
 
@@ -9,7 +10,7 @@ class ColorSchema(Schema):
     @post_load
     def make_color(self, data, **kwargs):
         return Color(**data)
-    
+"""
 
 
 

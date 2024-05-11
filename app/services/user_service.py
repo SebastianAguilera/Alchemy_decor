@@ -1,3 +1,4 @@
+"""
 from app.models import User
 from app.repositories import UserRepository
 
@@ -20,3 +21,4 @@ class UserService:
 
     def delete(self, id)->bool:
         return self.repository.delete(id)
+"""

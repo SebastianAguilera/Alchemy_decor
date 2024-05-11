@@ -1,3 +1,4 @@
+"""
 from flask import jsonify, Blueprint, request
 from app.mapping import UserSchema
 from app.services import UserService
@@ -7,7 +8,7 @@ service = UserService()
 user_schema = UserSchema()
 
 """
-Obtiene todas los Usuarios
+#Obtiene todas los Usuarios
 """
 @user.route('/', methods=['GET'])
 def all():
@@ -15,7 +16,7 @@ def all():
     return resp, 200
 
 """
-Obtiene un usuario por id
+#Obtiene un usuario por id
 """
 @user.route('/<int:id>', methods=['GET'])
 def one(id):
@@ -23,7 +24,7 @@ def one(id):
     return resp, 200
 
 """
-Crea un nuevo usuario
+#Crea un nuevo usuario
 """
 @user.route('/', methods=['POST'])
 def create():
@@ -32,7 +33,7 @@ def create():
     return resp, 201
 
 """
-Actualiza un usuario existente
+#Actualiza un usuario existente
 """
 @user.route('/<int:id>', methods=['PUT'])
 def update(id):
@@ -41,7 +42,7 @@ def update(id):
     return resp, 200
 
 """
-Elimina un usuario existente
+#Elimina un usuario existente
 """
 @user.route('/<int:id>', methods=['DELETE'])
 def delete(id):
@@ -50,3 +51,5 @@ def delete(id):
     if not resp:
         msg = "No se pudo eliminar la Tarea"
     return jsonify(msg), 204
+
+"""

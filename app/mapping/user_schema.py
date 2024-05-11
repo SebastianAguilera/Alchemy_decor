@@ -1,3 +1,4 @@
+"""
 from app.models import User
 from marshmallow import validate, Schema, fields, post_load
 
@@ -11,3 +12,4 @@ class UserSchema(Schema):
     @post_load
     def make_usuario(self, data, **kwargs):
         return User(**data)
+"""

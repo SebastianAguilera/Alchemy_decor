@@ -1,3 +1,4 @@
+"""
 from app.models import ProductColor
 from marshmallow import Schema, fields, post_load
 
@@ -9,3 +10,4 @@ class ProductColorSchema(Schema):
     def make_product_color(self, data, **kwargs):
         return ProductColor(**data)
 
+"""
