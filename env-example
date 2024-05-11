@@ -1,3 +1,6 @@
 POSTGRES_PASSWORD=clave_postgres
 POSTGRES_DB=nombre_base_de_datos
 POSTGRES_USER=nombre_usuario
+
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SQLALCHEMY_RECORD_QUERIES = True
