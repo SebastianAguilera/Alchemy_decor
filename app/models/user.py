@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from .user_data import UserData
+
 
 @dataclass(init=False, repr=True, eq=True)
 class User:
@@ -6,11 +8,14 @@ class User:
     password: str
     email: str
 
+    #Composicion (la clase user tiene una instancia de la clase userdata)
+    user_data: UserData
+    def __init__(self, user_data: UserData = None):
+        self.user_data = UserData()
+
 
 """
 from app import db
-from dataclasses import dataclass
-from .user_data import UserData
 
 @dataclass
 class User(db.Model):
