@@ -1,6 +1,5 @@
 import unittest
 from sqlalchemy import text
-
 from app import create_app, db
 
 

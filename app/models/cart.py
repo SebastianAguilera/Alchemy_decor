@@ -10,5 +10,4 @@ class Cart(db.Model):
     price: float = db.Column(db.Float, nullable=False)
     #relacion con productos
     products = db.relationship("Product", secondary="cart_product", back_populates="carts")
-"""
-    
+""" 

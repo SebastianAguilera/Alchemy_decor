@@ -1,3 +1,7 @@
+"""
+Configuración de la aplicación
+
+"""
 from asyncio.log import logger
 from dotenv import load_dotenv
 from pathlib import Path
@@ -14,13 +18,17 @@ class Config(object):
     @staticmethod
     def init_app(app):
         pass
-
+"""
+Configuración en entorno de desarrollo
+"""
 class DevelopmentConfig(Config):
     TESTING = True
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI')
-        
+"""
+Configuración en entorno de producción
+"""       
 class ProductionConfig(Config):
     DEBUG = False
     TESTING = False
@@ -30,7 +38,10 @@ class ProductionConfig(Config):
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
-
+"""
+Factory para la configuración de la aplicación
+param: entorno -> Entorno de ejecución de la aplicación
+"""
 def factory(app):
     configuration = {
         'development': DevelopmentConfig,

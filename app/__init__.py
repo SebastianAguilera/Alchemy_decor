@@ -23,10 +23,9 @@ def create_app() -> None:
     from app.resources import home
     app.register_blueprint(home, url_prefix='/api/v1')
     
-    @app.shell_context_processor    
+    @app.shell_context_processor      
     def ctx():
         return {"app": app}
-    
     return app
 
 

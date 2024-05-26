@@ -1,8 +1,17 @@
-"""
-
-from app import db
 from dataclasses import dataclass
 
+@dataclass(init=False, repr=True, eq=True)
+class Product:
+  id: int
+  name: str
+  description: str
+  price: float
+  
+
+
+
+"""
+from app import db
 @dataclass
 class Product(db.Model):
     __tablename__ = 'products'
@@ -16,5 +25,4 @@ class Product(db.Model):
     category = db.relationship("Category", back_populates='product')
     #relacion con carrito
     carts = db.relationship("Cart", secondary="cart_product", back_populates="products")
-
 """
