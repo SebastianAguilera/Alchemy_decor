@@ -51,7 +51,7 @@ class UserTestCase(unittest.TestCase):
     self.assertEqual(user.user_data.address, 'address 1234')
     self.assertEqual(user.user_data.phone, '542605502105')
     self.assertEqual(user.user_data.city, 'city')
-    self.assertEqual(user.user_data.country,)
+    self.assertEqual(user.user_data.country,'country')
 
 if __name__ == '__main__':
     unittest.main()

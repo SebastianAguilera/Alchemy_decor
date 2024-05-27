@@ -1,3 +1,12 @@
+from dataclasses import dataclass
+
+@dataclass(init=False, repr=True, eq=True)
+class Category:
+    id: int
+    name: str
+    description: str
+
+
 """
 from app import db
 from dataclasses import dataclass

@@ -1,67 +1,44 @@
-
-
-
-"""
-
 import unittest
 from flask import current_app
-from app import create_app
-from app.models import Product
+from app import create_app, db
+from app.models.product import Product
 
 class ProductTestCase(unittest.TestCase):
     def setUp(self):
-        self.NAME_PRUEBA = 'mesa de roble'
-        self.DESCRIPTION_PRUEBA = 'mesa de 2x1m, color marrón, 6 patas'
-        self.PRICE_PRUEBA = '70000'
-        self.COLORS_PRUEBA = 'marrón oscuro'
-        
         self.app = create_app()
+        self.app.config['TESTING'] = True
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
         self.app_context = self.app.app_context()
         self.app_context.push()
+        db.create_all()
+
+        self.PRODUCT_ID = 1
+        self.PRODUCT_NAME = 'Oak Table'
+        self.PRODUCT_DESCRIPTION = 'A sturdy oak table, 2x1m'
+        self.PRODUCT_PRICE = 700.00
+        self.PRODUCT_STOCK = 10
 
     def tearDown(self):
+        db.session.remove()
+        db.drop_all()
         self.app_context.pop()
 
     def test_app(self):
         self.assertIsNotNone(current_app)
-    
+
     def test_product(self):
-        product = self.__get_product()
-        self.assertTrue(product.name, self.NAME_PRUEBA)
-        self.assertTrue(product.description, self.DESCRIPTION_PRUEBA)
-        self.assertTrue(product.price, self.PRICE_PRUEBA)
-        self.assertTrue(product.colors, self.COLORS_PRUEBA)
-    
+        product = Product()
+        product.id = self.PRODUCT_ID
+        product.name = self.PRODUCT_NAME
+        product.description = self.PRODUCT_DESCRIPTION
+        product.price = self.PRODUCT_PRICE
+        product.stock = self.PRODUCT_STOCK
 
-    def test_product_save(self):
-        
-        product = self.__get_product()
-
-        product.save()
-        self.assertGreaterEqual(product.id, 1)
-        self.assertTrue(product.name, self.NAME_PRUEBA)
-        self.assertTrue(product.description(self.DESCRIPTION_PRUEBA))
-        self.assertTrue(product.price, self.PRICE_PRUEBA)
-        self.assertTrue(product.colors, self.COLORS_PRUEBA)
-    
-    def test_product_delete(self):
-        product = self.__get_product()
-        product.save()
-
-        #borro el usuario
-        product.delete()
-        self.assertIsNone(product.find(product.id))
-    
-    
-    def __get_product(self):
-        return Product(
-            name=self.NAME_PRUEBA,
-            description=self.DESCRIPTION_PRUEBA,
-            price=self.PRICE_PRUEBA,
-            colors=self.COLORS_PRUEBA
-        )
+        self.assertEqual(product.id, self.PRODUCT_ID)
+        self.assertEqual(product.name, self.PRODUCT_NAME)
+        self.assertEqual(product.description, self.PRODUCT_DESCRIPTION)
+        self.assertEqual(product.price, self.PRODUCT_PRICE)
+        self.assertEqual(product.stock, self.PRODUCT_STOCK)
 
 if __name__ == '__main__':
     unittest.main()
-
-"""
