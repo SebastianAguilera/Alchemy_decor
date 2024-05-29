@@ -1,3 +1,11 @@
+from dataclasses import dataclass
+
+@dataclass(init=False, repr=True, eq=True)
+class color:
+    color: str
+    name: str
+    description: str
+
 """
 from app import db
 from dataclasses import dataclass

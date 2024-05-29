@@ -1,3 +1,11 @@
+from dataclasses import dataclass
+
+@dataclass(init=False, repr=True, eq=True)
+class cart:
+    cart: str
+    state: str
+    deprice: str
+
 """
 from app import db
 from dataclasses import dataclass
