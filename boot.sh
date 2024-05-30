@@ -12,4 +12,3 @@ export FLASK_CONTEXT=$VAR_CONTEXT
 python3 app.py
 
 #ejecutar "./boot.sh development" para desarrollo y "./boot.sh production" para produccion
-

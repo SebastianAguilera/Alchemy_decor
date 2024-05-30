@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass(init=False, repr=True, eq=True)
-class cart:
+class Cart:
     cart: str
     state: str
     deprice: str

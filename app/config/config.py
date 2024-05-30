@@ -49,3 +49,4 @@ def factory(app):
     }
     
     return configuration[app]
+

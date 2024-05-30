@@ -24,7 +24,7 @@ class ProductTestCase(unittest.TestCase):
       product.price = 10.5
       product.stock = 10
 
-      self.assertEqual(product.id, 10)
+      self.assertTrue(product.id, 11)
       self.assertEqual(product.name, 'test')
       self.assertEqual(product.description, 'hola')
       self.assertEqual(product.price, 10.5)

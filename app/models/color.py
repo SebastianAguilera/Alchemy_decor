@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass(init=False, repr=True, eq=True)
-class color:
+class Color:
     color: str
     name: str
     description: str

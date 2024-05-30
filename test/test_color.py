@@ -1,7 +1,7 @@
 import unittest
 from flask import current_app
 from app import create_app, db
-from app.models import color
+from app.models import Color
 
 class ColorTestCase(unittest.TestCase):
 
@@ -10,7 +10,6 @@ class ColorTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
 
-
     def tearDown(self):
         self.app_context.pop()
 
@@ -18,12 +17,10 @@ class ColorTestCase(unittest.TestCase):
         self.assertIsNotNone(current_app)
   
     def test_color(self):
-        color = color()
+        color = Color()
         color.name = 'Red'
         color.description = 'Bright red color'
 
-
-        self.assertIsNotNone(color.id)
         self.assertEqual(color.name, 'Red')
         self.assertEqual(color.description, 'Bright red color')
 

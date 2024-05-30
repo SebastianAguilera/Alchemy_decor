@@ -1,16 +1,4 @@
 from dataclasses import dataclass
-
-
-@dataclass(init=False, repr=True, eq=True)
-class UserData:
-    surname: str
-    phone: str
-    address: str
-    city: str
-    country: str
-
-
-"""
 from app import db
 
 @dataclass
@@ -20,8 +8,10 @@ class UserData(db.Model):
     firstname: str = db.Column(db.String(120), nullable=True)
     lastname: str = db.Column(db.String(120), nullable=True)
     phone: str = db.Column(db.String(120), nullable=True)
-
+    address: str = db.Column(db.String(120), nullable=False)
+    city: str   = db.Column(db.String(120), nullable=False)
+    country: str = db.Column(db.String(120), nullable=False)
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
     user = db.relationship("User", back_populates='data')
-"""
+
 

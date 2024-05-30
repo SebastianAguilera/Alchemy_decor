@@ -1,13 +1,13 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
-from app.config import config
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from app.config import config
 
 db = SQLAlchemy()
-ma = Marshmallow()
 migrate = Migrate()
+ma = Marshmallow()
 
 def create_app() -> None:
     app_context = os.getenv('FLASK_CONTEXT')
@@ -23,9 +23,8 @@ def create_app() -> None:
     from app.resources import home
     app.register_blueprint(home, url_prefix='/api/v1')
     
-    @app.shell_context_processor      
+    @app.shell_context_processor
     def ctx():
         return {"app": app}
+    
     return app
-
-
