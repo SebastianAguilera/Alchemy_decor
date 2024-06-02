@@ -1,25 +1,17 @@
 from dataclasses import dataclass
-
-@dataclass(init=False, repr=True, eq=True)
-class Product:
-  id: int
-  name: str
-  description: str
-  price: float
-  stock: int
-  
-
-
-
-"""
 from app import db
+
 @dataclass
 class Product(db.Model):
     __tablename__ = 'products'
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name: str = db.Column(db.String(120), nullable=False)
     description: str = db.Column(db.String(120), nullable=False)
-    price: float = db.Column(db.Float(120), nullable=False)
+    price: float = db.Column(db.Float, nullable=False)
+    stock: int = db.Column(db.Integer, nullable=False)
+  
+
+"""
     #relacion con color
     colors = db.relationship("Color", secondary="product_color", back_populates="products")
     #relacion con categoria

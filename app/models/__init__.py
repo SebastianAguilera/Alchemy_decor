@@ -10,5 +10,4 @@ from .cart import Cart
 """
 from .product_color import ProductColor
 from .cart_product import CartProduct
-from .product_color import ProductColor
 """
