@@ -28,5 +28,41 @@ class CategoryTestCase(unittest.TestCase):
       self.assertEqual(category.name, 'test')
       self.assertEqual(category.description, 'test test test')
 
+  def test_category_save(self):
+        category = Category(name='test', description='test test test')
+        category.save()
+
+        self.assertGreaterEqual(category.id, 1)
+        self.assertEqual(category.name, 'test')
+        self.assertEqual(category.description, 'test test test')
+
+  def test_category_delete(self):
+        category = Category(name='test', description='test test test')
+        category.save()
+        category_id = category.id
+
+        category.delete()
+
+        self.assertIsNone(Category.find(category_id))
+
+  def test_category_all(self):
+        category1 = Category(name='test1', description='test test test1')
+        category2 = Category(name='test2', description='test test test2')
+        category1.save()
+        category2.save()
+
+        categories = Category.all()
+        self.assertGreaterEqual(len(categories), 2)
+
+  def test_category_find(self):
+        category = Category(name='test', description='test test test')
+        category.save()
+
+        category_find = Category.find(category.id)
+        self.assertIsNotNone(category_find)
+        self.assertEqual(category_find.id, category.id)
+        self.assertEqual(category_find.name, category.name)
+        self.assertEqual(category_find.description, category.description)
+
 if __name__ == '__main__':
     unittest.main()
