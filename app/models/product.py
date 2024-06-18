@@ -13,7 +13,7 @@ class Product(db.Model):
     stock: int = db.Column(db.Integer, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     #relacion con categoria
-    category = db.relationship("Category", back_populates='product')
+    #category = db.relationship("Category", back_populates='product')
     """
     #relacion con color
     colors = db.relationship("Color", secondary="category_color", back_populates="categorys")

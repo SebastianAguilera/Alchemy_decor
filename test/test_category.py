@@ -24,6 +24,7 @@ class CategoryTestCase(unittest.TestCase):
       category.id = 7
       category.name = 'test'
       category.description = 'test test test'
+      
       self.assertEqual(category.id, 7)
       self.assertEqual(category.name, 'test')
       self.assertEqual(category.description, 'test test test')

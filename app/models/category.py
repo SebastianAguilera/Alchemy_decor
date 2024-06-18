@@ -8,7 +8,7 @@ class Category(db.Model):
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name: str = db.Column(db.String(120), nullable=False)
     description: str = db.Column(db.String(120), nullable=False)
-    products = db.relationship("Product", back_populates='category')
+    #products = db.relationship("Product", back_populates='category')
 
     def save(self) -> 'Category':
         db.session.add(self)

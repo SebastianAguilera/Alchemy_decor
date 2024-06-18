@@ -21,20 +21,12 @@ class ProductTestCase(unittest.TestCase):
 
   def test_product(self):
       product = Product()
-      product.id = 10
-      product.name = 'test'
-      product.description = 'hola'
-      product.price = 10.5
+
       product.name = 'silla'
       product.description = 'test'
       product.price = 700.5
       product.stock = 10
 
-      self.assertTrue(product.id, 11)
-      self.assertEqual(product.name, 'test')
-      self.assertEqual(product.description, 'hola')
-      self.assertEqual(product.price, 10.5)
-      self.assertEqual(product.id, 10)
       self.assertEqual(product.name, 'silla')
       self.assertEqual(product.description, 'test')
       self.assertEqual(product.price, 700.5)
@@ -43,10 +35,6 @@ class ProductTestCase(unittest.TestCase):
   def test_product_save(self):
       product = Product()
 
-      product.id = 10
-      product.name = 'test'
-      product.description = 'hola'
-      product.price = 10.5
       product.name = 'silla'
       product.description = 'test'
       product.price = 700.5
@@ -62,10 +50,6 @@ class ProductTestCase(unittest.TestCase):
   def test_product_delete(self):
       product = Product()
 
-      product.id = 10
-      product.name = 'test'
-      product.description = 'hola'
-      product.price = 10.5
       product.name = 'silla'
       product.description = 'test'
       product.price = 700.5
@@ -80,10 +64,6 @@ class ProductTestCase(unittest.TestCase):
   def test_product_all(self):
       product = Product()
 
-      product.id = 10
-      product.name = 'test'
-      product.description = 'hola'
-      product.price = 10.5
       product.name = 'silla'
       product.description = 'test'
       product.price = 700.5
@@ -97,10 +77,6 @@ class ProductTestCase(unittest.TestCase):
   def test_product_find(self):
       product = Product()
 
-      product.id = 10
-      product.name = 'test'
-      product.description = 'hola'
-      product.price = 10.5
       product.name = 'silla'
       product.description = 'test'
       product.price = 700.5
