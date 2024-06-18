@@ -11,12 +11,15 @@ class Product(db.Model):
     description: str = db.Column(db.String(120), nullable=False)
     price: float = db.Column(db.Float, nullable=False)
     stock: int = db.Column(db.Integer, nullable=False)
+    #relacion con producto
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
-    #relacion con categoria
-    #category = db.relationship("Category", back_populates='product')
+    category = db.relationship("Category", back_populates='products')
     """
     #relacion con color
     colors = db.relationship("Color", secondary="category_color", back_populates="categorys")
+    colors = db.relationship("Color", secondary="category_color", back_populates="categorys")
+    
+    colors = db.relationship("Color", secondary="category_color", back_populates="categorys")  
     
     #relacion con carrito
     carts = db.relationship("Cart", secondary="cart_category", back_populates="categorys")
