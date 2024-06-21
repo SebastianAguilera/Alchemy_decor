@@ -11,7 +11,7 @@ class Product(db.Model):
     description: str = db.Column(db.String(120), nullable=False)
     price: float = db.Column(db.Float, nullable=False)
     stock: int = db.Column(db.Integer, nullable=False)
-    #relacion con producto
+    #relacion con category
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     category = db.relationship("Category", back_populates='products')
     #relacion con color

@@ -6,6 +6,9 @@ from app.models import Category
 class CategoryTestCase(unittest.TestCase):
 
   def setUp(self):
+    self.NAME_PRUEBA = 'test'
+    self.DESCRIPTION_PRUEBA = 'test test test'
+
     self.app = create_app()
     self.app_context = self.app.app_context()
     self.app_context.push()
@@ -20,50 +23,52 @@ class CategoryTestCase(unittest.TestCase):
       self.assertIsNotNone(current_app)
 
   def test_category(self):
-      category = Category()
-      category.id = 7
-      category.name = 'test'
-      category.description = 'test test test'
+      category = self.__get_category()
       
-      self.assertEqual(category.id, 7)
+      self.assertEqual(category.name, self.NAME_PRUEBA)
+      self.assertEqual(category.description, self.DESCRIPTION_PRUEBA)
+
+  def test_category_save(self):
+      category = self.__get_category()
+      category.save()
+
+      self.assertGreaterEqual(category.id, 1)
       self.assertEqual(category.name, 'test')
       self.assertEqual(category.description, 'test test test')
 
-  def test_category_save(self):
-        category = Category(name='test', description='test test test')
-        category.save()
-
-        self.assertGreaterEqual(category.id, 1)
-        self.assertEqual(category.name, 'test')
-        self.assertEqual(category.description, 'test test test')
-
   def test_category_delete(self):
-        category = Category(name='test', description='test test test')
-        category.save()
-        category_id = category.id
+      category = self.__get_category()
+      category.save()
+      category_id = category.id
 
-        category.delete()
+      category.delete()
 
-        self.assertIsNone(Category.find(category_id))
+      self.assertIsNone(Category.find(category_id))
 
   def test_category_all(self):
-        category1 = Category(name='test1', description='test test test1')
-        category2 = Category(name='test2', description='test test test2')
-        category1.save()
-        category2.save()
+      category1 = self.__get_category()
+      category2 = self.__get_category()
+      category1.save()
+      category2.save()
 
-        categories = Category.all()
-        self.assertGreaterEqual(len(categories), 2)
+      categories = Category.all()
+      self.assertGreaterEqual(len(categories), 2)
 
   def test_category_find(self):
-        category = Category(name='test', description='test test test')
-        category.save()
+      category = self.__get_category()
+      category.save()
 
-        category_find = Category.find(category.id)
-        self.assertIsNotNone(category_find)
-        self.assertEqual(category_find.id, category.id)
-        self.assertEqual(category_find.name, category.name)
-        self.assertEqual(category_find.description, category.description)
+      category_find = Category.find(category.id)
+      self.assertIsNotNone(category_find)
+      self.assertEqual(category_find.id, category.id)
+      self.assertEqual(category_find.name, category.name)
+      self.assertEqual(category_find.description, category.description)
+
+  def __get_category(self): 
+      category = Category()
+      category.name = self.NAME_PRUEBA
+      category.description = self.DESCRIPTION_PRUEBA
+      return category
 
 if __name__ == '__main__':
     unittest.main()
