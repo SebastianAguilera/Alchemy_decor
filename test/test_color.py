@@ -6,11 +6,14 @@ from app.models import Color
 class ColorTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.NAME_PRUEBA = 'Red'
+        self.DESCRIPTION_PRUEBA = 'Bright red color'
+
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
-    
+
     def tearDown(self):
         db.session.remove()
         db.drop_all()
@@ -20,20 +23,20 @@ class ColorTestCase(unittest.TestCase):
         self.assertIsNotNone(current_app)
 
     def test_color(self):
-        color = Color(name='Red', description='Bright red color')
-        self.assertEqual(color.name, 'Red')
-        self.assertEqual(color.description, 'Bright red color')
+        color = self.__get_color()
+        self.assertEqual(color.name, self.NAME_PRUEBA)
+        self.assertEqual(color.description, self.DESCRIPTION_PRUEBA)
 
     def test_color_save(self):
-        color = Color(name='Red', description='Bright red color')
+        color = self.__get_color()
         color.save()
 
         self.assertGreaterEqual(color.id, 1)
-        self.assertEqual(color.name, 'Red')
-        self.assertEqual(color.description, 'Bright red color')
+        self.assertEqual(color.name, self.NAME_PRUEBA)
+        self.assertEqual(color.description, self.DESCRIPTION_PRUEBA)
 
     def test_color_delete(self):
-        color = Color(name='Red', description='Bright red color')
+        color = self.__get_color()
         color.save()
         color_id = color.id
 
@@ -42,8 +45,8 @@ class ColorTestCase(unittest.TestCase):
         self.assertIsNone(Color.find(color_id))
 
     def test_color_all(self):
-        color1 = Color(name='Red', description='Bright red color')
-        color2 = Color(name='Blue', description='Deep blue color')
+        color1 = self.__get_color()
+        color2 = self.__get_color()
         color1.save()
         color2.save()
 
@@ -51,7 +54,7 @@ class ColorTestCase(unittest.TestCase):
         self.assertGreaterEqual(len(colors), 2)
 
     def test_color_find(self):
-        color = Color(name='Red', description='Bright red color')
+        color = self.__get_color()
         color.save()
 
         color_find = Color.find(color.id)
@@ -59,6 +62,12 @@ class ColorTestCase(unittest.TestCase):
         self.assertEqual(color_find.id, color.id)
         self.assertEqual(color_find.name, color.name)
         self.assertEqual(color_find.description, color.description)
+
+    def __get_color(self):
+        color = Color()
+        color.name = self.NAME_PRUEBA
+        color.description = self.DESCRIPTION_PRUEBA
+        return color
 
 if __name__ == '__main__':
     unittest.main()
