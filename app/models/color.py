@@ -8,6 +8,7 @@ class Color(db.Model):
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name: str = db.Column(db.String(120), nullable=False)
     description: str = db.Column(db.String(120), nullable=False)
+    products = db.relationship("ProductColor", back_populates="color")
 
     def save(self) -> 'Color':
         db.session.add(self)

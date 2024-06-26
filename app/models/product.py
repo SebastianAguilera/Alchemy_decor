@@ -15,8 +15,7 @@ class Product(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     category = db.relationship("Category", back_populates='products')
     #relacion con color
-    colors = db.relationship("Color", secondary="category_color", back_populates="categorys") 
-    
+    colors = db.relationship("ProductColor", back_populates="product") 
     """"
     #relacion con carrito
     carts = db.relationship("Cart", secondary="cart_category", back_populates="categorys")
