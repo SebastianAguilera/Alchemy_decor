@@ -10,3 +10,6 @@ __pycache__/
 *$py.class
 
 _data/
+
+#Carpeta de migraciones
+migrations/
