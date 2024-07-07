@@ -2,6 +2,9 @@ import unittest
 from flask import current_app
 from app import create_app, db
 from app.models import Category
+from app.services import CategoryService
+
+category_service = CategoryService()
 
 class CategoryTestCase(unittest.TestCase):
 
@@ -30,7 +33,7 @@ class CategoryTestCase(unittest.TestCase):
 
   def test_category_save(self):
       category = self.__get_category()
-      category.save()
+      category_service.save(category)
 
       self.assertGreaterEqual(category.id, 1)
       self.assertEqual(category.name, 'test')
@@ -38,27 +41,27 @@ class CategoryTestCase(unittest.TestCase):
 
   def test_category_delete(self):
       category = self.__get_category()
-      category.save()
+      category_service.save(category)
       category_id = category.id
 
-      category.delete()
+      category_service.delete(category)
 
-      self.assertIsNone(Category.find(category_id))
+      self.assertIsNone(category_service.find(category_id))
 
   def test_category_all(self):
       category1 = self.__get_category()
       category2 = self.__get_category()
-      category1.save()
-      category2.save()
+      category_service.save(category1)
+      category_service.save(category2)
 
-      categories = Category.all()
+      categories = category_service.all()
       self.assertGreaterEqual(len(categories), 2)
 
   def test_category_find(self):
       category = self.__get_category()
-      category.save()
+      category_service.save(category)
 
-      category_find = Category.find(category.id)
+      category_find = category_service.find(1)
       self.assertIsNotNone(category_find)
       self.assertEqual(category_find.id, category.id)
       self.assertEqual(category_find.name, category.name)

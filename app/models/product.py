@@ -24,30 +24,10 @@ class Product(db.Model):
     def __init__(self, category: Category = None):
         self.data = category
 
-    def save(self) -> 'Product':
-        db.session.add(self)
-        db.session.commit()
-        return self
-
-    def delete(self) -> None:
-        db.session.delete(self)
-        db.session.commit()
-
-    @classmethod
-    def all(cls) -> List['Product']:
-        return cls.query.all()
-
-    @classmethod
-    def find(cls, id: int) -> 'Product':
-        return cls.query.get(id)
-
-    @classmethod
-    def find_by(cls, **kwargs) -> List['Product']:
-        return cls.query.filter_by(**kwargs).all()
-    
+"""
 
 
-    """
+   #BORRAR ->
     def add_category(self, category):
         if category not in self.categorys:
             self.categorys.append(category)

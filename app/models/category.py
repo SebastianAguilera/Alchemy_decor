@@ -10,28 +10,9 @@ class Category(db.Model):
     description: str = db.Column(db.String(120), nullable=False)
     products = db.relationship("Product", back_populates='category')
 
-    def save(self) -> 'Category':
-        db.session.add(self)
-        db.session.commit()
-        return self
+"""
+    #BORRAR
 
-    def delete(self) -> None:
-        db.session.delete(self)
-        db.session.commit()
-    
-    @classmethod
-    def all(cls) -> List['Category']:
-        return cls.query.all()
-
-    @classmethod
-    def find(cls, id: int) -> 'Category':
-        return cls.query.get(id)
-
-    @classmethod
-    def find_by(cls, **kwargs) -> List['Category']:
-        return cls.query.filter_by(**kwargs).all()
-
-    """
     def add_product(self, product):
         if product not in self.products:
             self.products.append(product)
