@@ -2,6 +2,7 @@ import unittest
 from flask import current_app
 from app import create_app, db
 from app.models import Cart
+from app.services.cart_service import CartService
 
 class CartTestCase(unittest.TestCase):
 
@@ -14,6 +15,7 @@ class CartTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        self.cart_service = CartService()
 
     def tearDown(self):
         db.session.remove()
@@ -31,41 +33,41 @@ class CartTestCase(unittest.TestCase):
 
     def test_cart_save(self):
         cart = self.__get_cart()
-        cart.save()
+        saved_cart = self.cart_service.save(cart)
 
-        self.assertGreaterEqual(cart.id, 1)
-        self.assertEqual(cart.cart, self.CART_PRUEBA)
-        self.assertEqual(cart.state, self.STATE_PRUEBA)
-        self.assertEqual(cart.deprice, self.DEPRICE_PRUEBA)
+        self.assertGreaterEqual(saved_cart.id, 1)
+        self.assertEqual(saved_cart.cart, self.CART_PRUEBA)
+        self.assertEqual(saved_cart.state, self.STATE_PRUEBA)
+        self.assertEqual(saved_cart.deprice, self.DEPRICE_PRUEBA)
 
     def test_cart_delete(self):
         cart = self.__get_cart()
-        cart.save()
-        cart_id = cart.id
+        saved_cart = self.cart_service.save(cart)
+        cart_id = saved_cart.id
 
-        cart.delete()
+        self.cart_service.delete(saved_cart)
 
-        self.assertIsNone(Cart.find(cart_id))
+        self.assertIsNone(self.cart_service.find(cart_id))
 
     def test_cart_all(self):
         cart1 = self.__get_cart()
         cart2 = self.__get_cart()
-        cart1.save()
-        cart2.save()
+        self.cart_service.save(cart1)
+        self.cart_service.save(cart2)
 
-        carts = Cart.all()
+        carts = self.cart_service.all()
         self.assertGreaterEqual(len(carts), 2)
 
     def test_cart_find(self):
         cart = self.__get_cart()
-        cart.save()
+        saved_cart = self.cart_service.save(cart)
 
-        cart_find = Cart.find(cart.id)
+        cart_find = self.cart_service.find(saved_cart.id)
         self.assertIsNotNone(cart_find)
-        self.assertEqual(cart_find.id, cart.id)
-        self.assertEqual(cart_find.cart, cart.cart)
-        self.assertEqual(cart_find.state, cart.state)
-        self.assertEqual(cart_find.deprice, cart.deprice)
+        self.assertEqual(cart_find.id, saved_cart.id)
+        self.assertEqual(cart_find.cart, saved_cart.cart)
+        self.assertEqual(cart_find.state, saved_cart.state)
+        self.assertEqual(cart_find.deprice, saved_cart.deprice)
 
     def __get_cart(self):
         cart = Cart()

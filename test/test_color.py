@@ -2,6 +2,7 @@ import unittest
 from flask import current_app
 from app import create_app, db
 from app.models import Color
+from app.services.color_service import ColorService
 
 class ColorTestCase(unittest.TestCase):
 
@@ -13,6 +14,7 @@ class ColorTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        self.color_service = ColorService()
 
     def tearDown(self):
         db.session.remove()
@@ -29,39 +31,39 @@ class ColorTestCase(unittest.TestCase):
 
     def test_color_save(self):
         color = self.__get_color()
-        color.save()
+        saved_color = self.color_service.save(color)
 
-        self.assertGreaterEqual(color.id, 1)
-        self.assertEqual(color.name, self.NAME_PRUEBA)
-        self.assertEqual(color.description, self.DESCRIPTION_PRUEBA)
+        self.assertGreaterEqual(saved_color.id, 1)
+        self.assertEqual(saved_color.name, self.NAME_PRUEBA)
+        self.assertEqual(saved_color.description, self.DESCRIPTION_PRUEBA)
 
     def test_color_delete(self):
         color = self.__get_color()
-        color.save()
-        color_id = color.id
+        saved_color = self.color_service.save(color)
+        color_id = saved_color.id
 
-        color.delete()
+        self.color_service.delete(saved_color)
 
-        self.assertIsNone(Color.find(color_id))
+        self.assertIsNone(self.color_service.find(color_id))
 
     def test_color_all(self):
         color1 = self.__get_color()
         color2 = self.__get_color()
-        color1.save()
-        color2.save()
+        self.color_service.save(color1)
+        self.color_service.save(color2)
 
-        colors = Color.all()
+        colors = self.color_service.all()
         self.assertGreaterEqual(len(colors), 2)
 
     def test_color_find(self):
         color = self.__get_color()
-        color.save()
+        saved_color = self.color_service.save(color)
 
-        color_find = Color.find(color.id)
+        color_find = self.color_service.find(saved_color.id)
         self.assertIsNotNone(color_find)
-        self.assertEqual(color_find.id, color.id)
-        self.assertEqual(color_find.name, color.name)
-        self.assertEqual(color_find.description, color.description)
+        self.assertEqual(color_find.id, saved_color.id)
+        self.assertEqual(color_find.name, saved_color.name)
+        self.assertEqual(color_find.description, saved_color.description)
 
     def __get_color(self):
         color = Color()

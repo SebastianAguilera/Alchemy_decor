@@ -10,23 +10,3 @@ class Cart(db.Model):
     state: str = db.Column(db.String(120), nullable=False)
     deprice: str = db.Column(db.String(120), nullable=False)
 
-    def save(self) -> 'Cart':
-        db.session.add(self)
-        db.session.commit()
-        return self
-
-    def delete(self) -> None:
-        db.session.delete(self)
-        db.session.commit()
-
-    @classmethod
-    def all(cls) -> List['Cart']:
-        return cls.query.all()
-
-    @classmethod
-    def find(cls, id: int) -> 'Cart':
-        return cls.query.get(id)
-
-    @classmethod
-    def find_by(cls, **kwargs) -> List['Cart']:
-        return cls.query.filter_by(**kwargs).all()
