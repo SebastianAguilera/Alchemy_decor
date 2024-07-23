@@ -1,5 +1,6 @@
 from app.models import Cart
 from app.repositories import CartRepository
+from typing import List
 
 class CartService:
     def __init__(self):

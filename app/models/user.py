@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from .user_data import UserData
 from typing import List
 from app import db

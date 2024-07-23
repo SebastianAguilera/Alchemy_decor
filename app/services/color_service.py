@@ -1,5 +1,6 @@
 from app.models import Color
 from app.repositories import ColorRepository
+from typing import List
 
 class ColorService:
     def __init__(self):
