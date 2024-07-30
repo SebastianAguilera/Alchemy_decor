@@ -1,8 +1,9 @@
 from dataclasses import dataclass
+from app.models.audit_mixin import AuditMixin
 from app import db
 
 @dataclass
-class UserData(db.Model):
+class UserData(AuditMixin, db.Model):
     __tablename__ = 'users_data'
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname: str = db.Column(db.String(120), nullable=True)

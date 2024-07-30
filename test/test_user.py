@@ -3,6 +3,7 @@ from flask import current_app
 from app import create_app, db
 from app.models import User, UserData
 from app.services import UserService
+from datetime import datetime as dt
 
 user_service = UserService()
 
@@ -61,6 +62,12 @@ class UserTestCase(unittest.TestCase):
     self.assertEqual(user.data.address, self.ADDRESS_PRUEBA)
     self.assertEqual(user.data.city, self.CITY_PRUEBA)
     self.assertEqual(user.data.country, self.COUNTRY_PRUEBA)
+
+    """"
+    self.assertIsNotNone(user.data.created_at)
+    self.assertLess(user.data.created_at, dt.now())
+    self.assertTrue(user.data.updated_at)
+    """
 
   def test_user_delete(self):
     user = self.__get_user()

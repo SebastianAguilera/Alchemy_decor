@@ -13,3 +13,6 @@ _data/
 
 #Carpeta de migraciones
 migrations/
+
+# add vscode workspace settings
+*.code-workspace
