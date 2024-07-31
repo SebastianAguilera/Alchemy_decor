@@ -23,17 +23,3 @@ class Product(db.Model):
 
     def __init__(self, category: Category = None):
         self.data = category
-
-"""
-
-
-   #BORRAR ->
-    def add_category(self, category):
-        if category not in self.categorys:
-            self.categorys.append(category)
-    
-    def remove_category(self, category):
-        if category in self.categorys:
-            self.categorys.remove(category)    
-
-    """
