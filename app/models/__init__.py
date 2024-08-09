@@ -4,5 +4,6 @@ from .product import Product
 from .category import Category
 from .color import Color
 from .product_color import ProductColor
+from .payment import Payment
 
 
