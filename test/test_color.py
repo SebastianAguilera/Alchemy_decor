@@ -7,9 +7,8 @@ from app.services.color_service import ColorService
 class ColorTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.NAME_PRUEBA = 'Red'
-        self.DESCRIPTION_PRUEBA = 'Bright red color'
-
+        self.COLOR_NAME = 'leon'
+        self.COLOR_DESCRIPTION = 'amarillito tirando a marroncito'
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
@@ -26,24 +25,22 @@ class ColorTestCase(unittest.TestCase):
 
     def test_color(self):
         color = self.__get_color()
-        self.assertEqual(color.name, self.NAME_PRUEBA)
-        self.assertEqual(color.description, self.DESCRIPTION_PRUEBA)
+        self.assertEqual(color.name, self.COLOR_NAME)
+        self.assertEqual(color.description, self.COLOR_DESCRIPTION)
 
     def test_color_save(self):
         color = self.__get_color()
         saved_color = self.color_service.save(color)
 
         self.assertGreaterEqual(saved_color.id, 1)
-        self.assertEqual(saved_color.name, self.NAME_PRUEBA)
-        self.assertEqual(saved_color.description, self.DESCRIPTION_PRUEBA)
+        self.assertEqual(saved_color.name, self.COLOR_NAME)
+        self.assertEqual(saved_color.description, self.COLOR_DESCRIPTION)
 
     def test_color_delete(self):
         color = self.__get_color()
         saved_color = self.color_service.save(color)
         color_id = saved_color.id
-
         self.color_service.delete(saved_color)
-
         self.assertIsNone(self.color_service.find(color_id))
 
     def test_color_all(self):
@@ -67,8 +64,8 @@ class ColorTestCase(unittest.TestCase):
 
     def __get_color(self):
         color = Color()
-        color.name = self.NAME_PRUEBA
-        color.description = self.DESCRIPTION_PRUEBA
+        color.name = self.COLOR_NAME
+        color.description = self.COLOR_DESCRIPTION
         return color
 
 if __name__ == '__main__':

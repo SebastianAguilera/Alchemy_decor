@@ -11,6 +11,8 @@ class ColorRepository:
 
     def update(self, color: Color, id: int) -> Color:
         entity = self.find(id)
+        if entity == None:
+          return None
         entity.name = color.name
         entity.description = color.description
         db.session.add(entity)

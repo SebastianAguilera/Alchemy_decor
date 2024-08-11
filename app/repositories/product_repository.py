@@ -11,6 +11,8 @@ class ProductRepository:
 
   def update(self, product: Product, id: int) -> Product:
     entity = self.find(id)
+    if entity == None:
+      return None
     entity.name = product.name
     entity.description = product.description
     entity.price = product.price
