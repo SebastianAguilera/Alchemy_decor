@@ -35,6 +35,3 @@ class PaymentRepository:
       return db.session.query(Payment).filter(Payment.id == id).one()
     except:
       return None
-
-  def find_by_name(self, name: str) -> Payment: 
-    return db.session.query(Payment).filter(Payment.name == name).one_or_none()

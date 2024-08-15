@@ -16,6 +16,3 @@ class ProductColorService:
   
   def find(self, product_id: int, color_id: int) -> ProductColor:
     return repository.find(product_id, color_id)
-
-  def all(self) -> List[ProductColor]:
-    return repository.all()

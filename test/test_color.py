@@ -56,11 +56,21 @@ class ColorTestCase(unittest.TestCase):
         color = self.__get_color()
         saved_color = self.color_service.save(color)
 
-        color_find = self.color_service.find(saved_color.id)
-        self.assertIsNotNone(color_find)
-        self.assertEqual(color_find.id, saved_color.id)
-        self.assertEqual(color_find.name, saved_color.name)
-        self.assertEqual(color_find.description, saved_color.description)
+        color_found = self.color_service.find(saved_color.id)
+        self.assertIsNotNone(color_found)
+        self.assertEqual(color_found.id, saved_color.id)
+        self.assertEqual(color_found.name, saved_color.name)
+        self.assertEqual(color_found.description, saved_color.description)
+
+    def test_color_update(self):
+        color = self.__get_color()
+        saved_color = self.color_service.save(color)
+        new_color = Color(name="Red", description="Bright red color")
+        self.color_service.update(new_color, saved_color.id)
+        self.assertIsNotNone(self.color_service.find(saved_color.id))
+        self.assertEqual(saved_color.id, 1)
+        self.assertEqual(saved_color.name, new_color.name)
+        self.assertEqual(saved_color.description, new_color.description)
 
     def __get_color(self):
         color = Color()

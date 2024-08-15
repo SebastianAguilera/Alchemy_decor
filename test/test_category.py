@@ -67,6 +67,18 @@ class CategoryTestCase(unittest.TestCase):
       self.assertEqual(category_find.name, category.name)
       self.assertEqual(category_find.description, category.description)
 
+  
+  def test_category_update(self):
+      category = self.__get_category()
+      saved_category = category_service.save(category)
+      new_category = Category(name="mesa", description="4 patas")
+      category_service.update(new_category, saved_category.id)
+      self.assertIsNotNone(category_service.find(saved_category.id))
+      self.assertEqual(saved_category.id, 1)
+      self.assertEqual(saved_category.name, new_category.name)
+      self.assertEqual(saved_category.description, new_category.description)
+
+
   def __get_category(self): 
       category = Category()
       category.name = self.NAME_PRUEBA

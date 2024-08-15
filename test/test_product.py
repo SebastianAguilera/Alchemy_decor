@@ -63,6 +63,14 @@ class ProductTestCase(unittest.TestCase):
     self.assertEqual(product_find.description, product.description)
     self.assertEqual(product_find.price, product.price)
 
+  def test_product_find_by_name(self):
+    product = self.__get_product()
+    self.product_services.save(product)
+    name = self.NAME_PRUEBA
+    product_found = self.product_services.find_by_name(name)
+    self.assertIsNotNone(product_found)
+    self.assertEqual(product_found.id, product.id)
+
   def __get_product(self): 
     product = Product()
     product.name = self.NAME_PRUEBA

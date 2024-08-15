@@ -24,6 +24,3 @@ class ProductColorRepository:
         if entity:
             db.session.delete(entity)
             db.session.commit()
-
-    def all(self) -> List[ProductColor]:
-        return db.session.query(ProductColor).all()

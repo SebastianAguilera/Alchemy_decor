@@ -14,4 +14,13 @@ class UserData(db.Model):
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
     user = db.relationship("User", back_populates='data')
 
+    def __init__(self, firstname: str = None, lastname: str = None, phone: str = None, address: str = None, city: str = None, country: str = None):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.phone = phone
+        self.address = address
+        self.city = city
+        self.country = country
+
+
 

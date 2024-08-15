@@ -41,11 +41,24 @@ class ProductColorTestCase(unittest.TestCase):
     self.assertEqual(saved_product_color.color_id, color.id)
     self.assertEqual(saved_product_color.stock, self.STOCK)
 
+  def test_product_color_find(self):
+    product_color, product, color = self.__get_product_color()
+    saved_product_color = self.product_color_services.save(product_color)
+    self.assertIsNotNone(self.product_color_services.find(saved_product_color.product_id, saved_product_color.color_id))
+
+
   def test_product_color_delete(self):
     product_color, product, color = self.__get_product_color()
     saved_product_color = self.product_color_services.save(product_color)
     self.product_color_services.delete(saved_product_color.product_id, saved_product_color.color_id)
     self.assertIsNone(self.product_color_services.find(saved_product_color.product_id, saved_product_color.color_id))
+
+  def test_product_color_update_stock(self):
+    product_color, product, color = self.__get_product_color()
+    saved_product_color = self.product_color_services.save(product_color)
+    new_stock = 20
+    self.product_color_services.update_stock(product.id, color.id, new_stock)
+    self.assertEqual(saved_product_color.stock, new_stock)  
 
   def __get_product_color(self):
     product = self.__create_product()
@@ -68,5 +81,6 @@ class ProductColorTestCase(unittest.TestCase):
     color.name = self.COLOR_NAME
     color.description = self.COLOR_DESCRIPTION
     return self.color_services.save(color)
-
-
+  
+if __name__ == '__main__':
+    unittest.main()

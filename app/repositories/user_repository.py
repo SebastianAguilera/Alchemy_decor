@@ -39,5 +39,6 @@ class UserRepository:
   def find_by_email(self, email: str) -> User:
     return db.session.query(User).filter(User.email.like(f'%{email}%')).all()
   
+
     
 

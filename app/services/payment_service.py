@@ -20,5 +20,3 @@ class PaymentService:
   def find(self, id: int) -> Payment:
     return repository.find(id)
 
-  def find_by_name(self, name: str) -> Payment:
-    return repository.find_by_name(name)
