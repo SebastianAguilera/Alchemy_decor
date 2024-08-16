@@ -10,14 +10,7 @@ class Category(db.Model):
     description: str = db.Column(db.String(120), nullable=False)
     products = db.relationship("Product", back_populates='category')
 
-"""
-    #BORRAR
+    def __init__(self, name : str = None, description : str = None):
+        self.name = name
+        self.description = description
 
-    def add_product(self, product):
-        if product not in self.products:
-            self.products.append(product)
-    
-    def remove_product(self, product):
-        if product in self.products:
-            self.products.remove(product)
-    """

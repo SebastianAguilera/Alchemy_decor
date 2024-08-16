@@ -7,9 +7,8 @@ from app.services.color_service import ColorService
 class ColorTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.NAME_PRUEBA = 'Red'
-        self.DESCRIPTION_PRUEBA = 'Bright red color'
-
+        self.COLOR_NAME = 'leon'
+        self.COLOR_DESCRIPTION = 'amarillito tirando a marroncito'
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
@@ -26,24 +25,22 @@ class ColorTestCase(unittest.TestCase):
 
     def test_color(self):
         color = self.__get_color()
-        self.assertEqual(color.name, self.NAME_PRUEBA)
-        self.assertEqual(color.description, self.DESCRIPTION_PRUEBA)
+        self.assertEqual(color.name, self.COLOR_NAME)
+        self.assertEqual(color.description, self.COLOR_DESCRIPTION)
 
     def test_color_save(self):
         color = self.__get_color()
         saved_color = self.color_service.save(color)
 
         self.assertGreaterEqual(saved_color.id, 1)
-        self.assertEqual(saved_color.name, self.NAME_PRUEBA)
-        self.assertEqual(saved_color.description, self.DESCRIPTION_PRUEBA)
+        self.assertEqual(saved_color.name, self.COLOR_NAME)
+        self.assertEqual(saved_color.description, self.COLOR_DESCRIPTION)
 
     def test_color_delete(self):
         color = self.__get_color()
         saved_color = self.color_service.save(color)
         color_id = saved_color.id
-
         self.color_service.delete(saved_color)
-
         self.assertIsNone(self.color_service.find(color_id))
 
     def test_color_all(self):
@@ -59,16 +56,26 @@ class ColorTestCase(unittest.TestCase):
         color = self.__get_color()
         saved_color = self.color_service.save(color)
 
-        color_find = self.color_service.find(saved_color.id)
-        self.assertIsNotNone(color_find)
-        self.assertEqual(color_find.id, saved_color.id)
-        self.assertEqual(color_find.name, saved_color.name)
-        self.assertEqual(color_find.description, saved_color.description)
+        color_found = self.color_service.find(saved_color.id)
+        self.assertIsNotNone(color_found)
+        self.assertEqual(color_found.id, saved_color.id)
+        self.assertEqual(color_found.name, saved_color.name)
+        self.assertEqual(color_found.description, saved_color.description)
+
+    def test_color_update(self):
+        color = self.__get_color()
+        saved_color = self.color_service.save(color)
+        new_color = Color(name="Red", description="Bright red color")
+        self.color_service.update(new_color, saved_color.id)
+        self.assertIsNotNone(self.color_service.find(saved_color.id))
+        self.assertEqual(saved_color.id, 1)
+        self.assertEqual(saved_color.name, new_color.name)
+        self.assertEqual(saved_color.description, new_color.description)
 
     def __get_color(self):
         color = Color()
-        color.name = self.NAME_PRUEBA
-        color.description = self.DESCRIPTION_PRUEBA
+        color.name = self.COLOR_NAME
+        color.description = self.COLOR_DESCRIPTION
         return color
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from .user_data import UserData
 from typing import List
 from app import db
@@ -12,10 +12,19 @@ class User(db.Model):
     password: str = db.Column('password', db.String(255), nullable=False)
     data = db.relationship('UserData', back_populates='user', uselist=False)
 
+
+    def __init__(self, username: str = None, password: str = None, email: str = None, user_data: UserData = None):
+      self.username = username
+      self.password = password
+      self.email = email
+      self.data = user_data
+
+    """
     def __init__(self, user_data: UserData = None):
         self.data = user_data
+    """
 
- 
+
 
  
 

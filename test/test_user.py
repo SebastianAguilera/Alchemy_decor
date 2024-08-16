@@ -83,6 +83,21 @@ class UserTestCase(unittest.TestCase):
     self.assertEqual(user_find.id, user.id)
     self.assertEqual(user_find.email, user.email)
 
+  def test_user_find_by_username(self):
+    user = self.__get_user()
+    user_service.save(user)
+    username = self.USERNAME_PRUEBA
+    user_found = user_service.find_by_username(username)
+    self.assertIsNotNone(user_found)
+    self.assertEqual(user_found.id, user.id)
+
+  def test_user_find_by_email(self):
+    user = self.__get_user()
+    user_service.save(user)
+    email = self.EMAIL_PRUEBA
+    user_found = user_service.find_by_email(email)
+    self.assertIsNotNone(user_found)
+
   def __get_user(self): 
     data = UserData()
     data.firstname = self.FIRSTNAME_PRUEBA
@@ -91,10 +106,11 @@ class UserTestCase(unittest.TestCase):
     data.address = self.ADDRESS_PRUEBA
     data.city = self.CITY_PRUEBA
     data.country = self.COUNTRY_PRUEBA
-    user = User(data)
+    user = User()
     user.username = self.USERNAME_PRUEBA
     user.email = self.EMAIL_PRUEBA
     user.password = self.PASSWORD_PRUEBA
+    user.data = data
     return user
 
 if __name__ == '__main__':
