@@ -19,11 +19,6 @@ class User(db.Model):
       self.email = email
       self.data = user_data
 
-    """
-    def __init__(self, user_data: UserData = None):
-        self.data = user_data
-    """
-
 
 
  

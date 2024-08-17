@@ -1,8 +1,8 @@
 import unittest
 from flask import current_app
 from app import create_app, db
-from app.models import Factura
-from app.services.factura_service import FacturaService
+from app.models import Invoice
+from app.services import InvoiceService
 
 class FacturaTestCase(unittest.TestCase):
 
@@ -15,7 +15,7 @@ class FacturaTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
-        self.factura_service = FacturaService()
+        self.factura_service = InvoiceService()
 
     def tearDown(self):
         db.session.remove()
@@ -70,7 +70,7 @@ class FacturaTestCase(unittest.TestCase):
         self.assertEqual(factura_find.total, saved_factura.total)
 
     def __get_factura(self):
-        return Factura(number=self.NUMBER_PRUEBA, date=self.DATE_PRUEBA, total=self.TOTAL_PRUEBA)
+        return Invoice(number=self.NUMBER_PRUEBA, date=self.DATE_PRUEBA, total=self.TOTAL_PRUEBA)
 
 if __name__ == '__main__':
     unittest.main()
