@@ -8,9 +8,12 @@ class Order(db.Model):
     amount: float = db.Column(db.Float, nullable=False)
     payment_date: str = db.Column(db.String(120), nullable=False)
     status: str = db.Column(db.String(120), nullable=False)
-    # Relación con la entidad Factura
-    #factura_id = db.Column(db.Integer, db.ForeignKey('facturas.id'))
-    #factura = db.relationship("Factura", back_populates="ordenes_de_pago")
+    #Una orden puede tener varias facturas 
+    invoices = db.relationship("Invoice", back_populates="order", cascade="all, delete-orphan")
+    #Relacion entre orden y producto
+    product_orders = db.relationship("OrderProduct", back_populates="order", cascade="all, delete-orphan")
+    #Relacion con payment
+    payments = db.relationship("Payment", back_populates="order")
 
     def __init__(self, amount: float, payment_date: str, status: str):
         self.amount = amount

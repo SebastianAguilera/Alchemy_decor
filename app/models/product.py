@@ -14,7 +14,9 @@ class Product(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     category = db.relationship("Category", back_populates='products')
     #relacion con color
-    colors = db.relationship("ProductColor", back_populates="product") 
+    color_products = db.relationship("ProductColor", back_populates="product") 
+    #relacion con order
+    order_products = db.relationship("OrderProduct", back_populates="product", cascade="all, delete-orphan")
     
     def __init__(self, category: Category = None):
         self.data = category

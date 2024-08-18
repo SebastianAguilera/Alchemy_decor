@@ -11,3 +11,6 @@ class Payment(db.Model):
   payment_method: str = db.Column(db.String(120), nullable=False)
   payment_date: str = db.Column(db.String(120), nullable=False)
   transaction_id: int = db.Column(db.Integer, nullable=False)
+  #Relacion con order
+  order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+  order = db.relationship("Order", back_populates="payments")

@@ -9,6 +9,9 @@ class Invoice(db.Model):
     number: str = db.Column(db.String(120), nullable=False)
     date: str = db.Column(db.String(120), nullable=False)
     total: float = db.Column(db.Float, nullable=False)
+    
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+    order = db.relationship("Order", back_populates="invoices")
 
     def __init__(self, number: str, date: str, total: float):
         self.number = number

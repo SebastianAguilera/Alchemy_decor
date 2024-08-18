@@ -7,4 +7,5 @@ from .product_color import ProductColor
 from .payment import Payment
 from .order import Order
 from .invoice import Invoice
+from .order_product import OrderProduct
 
