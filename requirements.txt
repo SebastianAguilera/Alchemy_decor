@@ -8,3 +8,5 @@ Flask-Migrate==4.0.4
 passlib==1.7.4
 psycopg2==2.9.7
 psycopg[binary]
+werkzeug>=3.0.3 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
