@@ -25,6 +25,7 @@ class HomeResourceTestCase(unittest.TestCase):
     self.assertEqual(message.message, response['message'])
     self.assertEqual(message.status_code, response['status_code'])
     self.assertEqual(message.data, response['data'])
+    
 if __name__ == '__main__':
   unittest.main()
 

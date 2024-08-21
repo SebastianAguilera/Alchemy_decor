@@ -14,6 +14,9 @@ class Order(db.Model):
     product_orders = db.relationship("OrderProduct", back_populates="order", cascade="all, delete-orphan")
     #Relacion con payment
     payments = db.relationship("Payment", back_populates="order")
+    #Relacion con User
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship("User", back_populates="orders")
 
     def __init__(self, amount: float, payment_date: str, status: str):
         self.amount = amount

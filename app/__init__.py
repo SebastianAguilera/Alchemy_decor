@@ -4,6 +4,7 @@ import os
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from app.config import config
+from app.route import RouteApp
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -16,13 +17,13 @@ def create_app() -> None:
     f = config.factory(app_context if app_context else 'development')
     app.config.from_object(f)
 
+    route = RouteApp()
+    route.init_app(app)
+
     ma.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
-    
-    from app.resources import home
-    app.register_blueprint(home, url_prefix='/api/v1')
-    
+     
     @app.shell_context_processor
     def ctx():
         return {"app": app}
