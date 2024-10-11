@@ -1,5 +1,5 @@
 #imagen de python
-FROM python:3.10-slim-bullseye
+FROM python:3.12.7-slim-bullseye
 
 #configuraciones
 ENV GECKODRIVER_VER=v0.31.0
